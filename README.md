@@ -10,7 +10,7 @@ It supports:
 - Cart management (add/view/clear)
 - Order creation and order status tracking
 
-No full authentication layer is used, as requested. Data is stored in-memory for simplicity.
+No full authentication layer is used, as requested. Data is stored with SQLite (`chuks-kitchen.db`).
 
 ## 2) How The System Works End-to-End
 1. Customer signs up using email or phone.
@@ -88,10 +88,10 @@ Design flow images already provided in `diagrams/` were followed:
 - Payment is simulated with a boolean field `paymentCompleted`.
 - Currency defaults to NGN.
 - Single-cart-per-user model is used.
-- Persistent database is not required for this assignment.
+- SQL persistence is implemented using SQLite.
 
 ## 6) Scalability Thoughts (100 -> 10,000+ users)
-- Move from in-memory data to PostgreSQL or MongoDB.
+- Move from SQLite single-node setup to PostgreSQL.
 - Add Redis for OTP sessions and caching food lists.
 - Add proper auth and role-based access control (JWT + refresh tokens).
 - Add background jobs for notifications/status updates (BullMQ/RabbitMQ).
@@ -159,9 +159,13 @@ Design flow images already provided in `diagrams/` were followed:
 
 ### Order APIs
 - `POST /api/orders` (create order from cart)
+- `GET /api/orders` (new endpoint: list orders, optional `?userId=...`)
 - `GET /api/orders/:id` (fetch order details/status)
 - `PATCH /api/orders/:id/status` (status progression)
 - `POST /api/orders/:id/cancel` (cancel order)
+
+### API Docs
+- `GET /api-docs` (Swagger UI)
 
 ## 10) API Examples
 ### Signup
@@ -233,7 +237,7 @@ Content-Type: application/json
 src/
   app.js
   server.js
-  data/store.js
+  data/db.js
   routes/
     users.js
     foods.js
@@ -242,6 +246,10 @@ src/
   utils/
     helpers.js
     validators.js
+docs/
+  openapi.json
+postman/
+  Chuks-Kitchen-API.postman_collection.json
 diagrams/
 README.md
 package.json
@@ -258,3 +266,6 @@ Server starts at:
 
 Health check:
 - `GET /`
+
+Swagger:
+- `GET /api-docs`
