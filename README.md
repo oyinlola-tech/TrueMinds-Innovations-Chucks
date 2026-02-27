@@ -269,3 +269,29 @@ Health check:
 
 Swagger:
 - `GET /api-docs`
+
+## 13) Technical Description
+### Prerequisites
+- Node.js `18+`
+- npm `9+`
+
+### Runtime behavior
+- Server runs with Express on port `4000` by default.
+- SQLite database file `chuks-kitchen.db` is auto-created at project root.
+- Database schema is auto-created on startup in [db.js](c:\Users\donri\OneDrive\Desktop\Chucks\src\data\db.js).
+- Seed data for foods/referrals is inserted automatically if tables are empty.
+
+### Key integration files
+- API server: [server.js](c:\Users\donri\OneDrive\Desktop\Chucks\src\server.js)
+- App wiring + Swagger mount: [app.js](c:\Users\donri\OneDrive\Desktop\Chucks\src\app.js)
+- SQL access layer: [db.js](c:\Users\donri\OneDrive\Desktop\Chucks\src\data\db.js)
+- Swagger spec: [openapi.json](c:\Users\donri\OneDrive\Desktop\Chucks\docs\openapi.json)
+- Postman collection: [Chuks-Kitchen-API.postman_collection.json](c:\Users\donri\OneDrive\Desktop\Chucks\postman\Chuks-Kitchen-API.postman_collection.json)
+
+### Quick verification flow
+1. `POST /api/signup`
+2. `POST /api/verify` with OTP `123456`
+3. `GET /api/foods`
+4. `POST /api/cart/items`
+5. `POST /api/orders`
+6. `GET /api/orders/:id`
