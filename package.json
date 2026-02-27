@@ -1,0 +1,20 @@
+{
+  "name": "chuks-kitchen-backend",
+  "version": "1.0.0",
+  "description": "Food ordering and customer management backend for Chuks Kitchen assignment",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "keywords": [
+    "express",
+    "food-ordering",
+    "backend"
+  ],
+  "author": "TrueMinds Backend Assignment",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
